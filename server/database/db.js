@@ -1,31 +1,33 @@
 require("dotenv").config();
 const { Pool } = require('pg');
 const Promise = require("bluebird");
-console.log('name', process.env.DB_NAME)
+// console.log('name', process.env.DB_NAME)
 
 const pool = new Pool({
   host: process.env.DB_HOST,
-  port: process.env.PORT,
+  port: 5432,
+  // port: process.env.PORT,
+
   max: 20,
   database: 'test',
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 20000, //this was 2000
 });
+//make username?
 
 const db = Promise.promisifyAll(pool, { multiArgs: true });
 
 db.connectAsync() // this only connects and creates the responses table
-  .then(() => console.log(`Connected to MySQL as id: ${db.threadId}`))
+  .then(() => console.log(`Connected to PostGresql in database, on ${process.env.PORT}`))
   .then(() => {
-    console.log('db.threadId', db.threadId);
+    // console.log('db.threadId', db.threadId);
     // Expand this table definition as needed:
 
     db.queryAsync(
-      "CREATE TABLE IF NOT EXISTS test (id SERIAL, s_id VARCHAR(50) NOT NULL UNIQUE, username VARCHAR(35) NOT NULL, email VARCHAR(255), password VARCHAR(25), line1 VARCHAR(50), line2 VARCHAR(50), city VARCHAR(50), state VARCHAR(50), zip VARCHAR(11), phone VARCHAR(25), ccNumber VARCHAR(35), expDate VARCHAR(20),billingzip VARCHAR(11))"
-    ) //this creates responses table
+      "CREATE TABLE IF NOT EXISTS testing (id SERIAL, s_id VARCHAR(50) NOT NULL UNIQUE, username VARCHAR(35) NOT NULL)"
+    ) //this creates test table
   })
   .catch((err) => console.log(err));
-//make username?
 
 // pool.connect((err, client, release) => {
 //   if (err) {
