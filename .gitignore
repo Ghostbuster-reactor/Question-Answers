@@ -1,3 +1,9 @@
+# My added ignored files
+node_modules
+client/dist
+server/Controllers/env/config.js
+coverage
+
 # Logs
 logs
 *.log

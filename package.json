@@ -1,0 +1,25 @@
+{
+  "name": "question-answers",
+  "version": "1.0.0",
+  "description": "System Design Capstone project for Questions and Answers of an e-commerce site",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ghostbuster-reactor/Question-Answers.git"
+  },
+  "author": "Tessa Thornberry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ghostbuster-reactor/Question-Answers/issues"
+  },
+  "homepage": "https://github.com/Ghostbuster-reactor/Question-Answers#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.8.0"
+  }
+}
