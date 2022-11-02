@@ -1,19 +1,19 @@
+require("dotenv").config();
 const express = require('express');
-const path = require('path');
 const morgan = require('morgan');
-const router = require('./routes.js');
-const pool = require('./Database')
-// require('dotenv').config();
+const pool = require('./database/db.js');
+// const path = require('path');
+// const router = require('./routes.js');
 
 const app = express();
-const port = 1299;
+
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+// app.use(express.static(path.join(__dirname, '../client/dist'))); //for when client is cloned
 
-app.use(express());
 app.get('/', (req, res) => {
   pool.query('SELECT * from test', (err, result) => {
     if (err) throw err;

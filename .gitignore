@@ -3,6 +3,10 @@ node_modules
 client/dist
 server/Controllers/env/config.js
 coverage
+.env
+*.DS_Store
+*.map
+*bundle.js
 
 # Logs
 logs
