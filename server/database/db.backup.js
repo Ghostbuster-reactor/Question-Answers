@@ -7,13 +7,14 @@ mongoose.connect(uri, {useNewUrlParser: true});
 
 /**making new schema */
 const questionsSchema = new Schema({
-  question_id: INT PRIMARY-KEY AUTO-INCREMENT,
+  id: INT PRIMARY-KEY AUTO-INCREMENT,
   product_id: INT,
-  question_body: VARCHAR,
-  question_date: DATE,
+  body: VARCHAR,
+  date_written: INT,
   asker_name: VARCHAR,
-  question_helpfulness: INT,
+  asker_email: VARCHAR,
   reported: BOOLEAN,
+  helpful: INT
 });
 
 const answersSchema = new Schema({
