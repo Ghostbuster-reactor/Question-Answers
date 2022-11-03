@@ -1,36 +1,13 @@
-CREATE DATABASE chat;
+\c qanda;
 
-USE chat;
+-- COPY questions from '/Users/tthornberryclass/HackReactorSEI/CSV-SDC/questions.csv' DELIMITER ',' CSV HEADER;
 
-COPY CODE HERE
+-- COPY answers from '/Users/tthornberryclass/HackReactorSEI/CSV-SDC/answers.csv' DELIMITER ',' CSV HEADER;
 
-
-CREATE TABLE users (
-  id INTEGER(11) PRIMARY KEY AUTO_INCREMENT,
-  username VARCHAR(255) NOT NULL
-  /* Describe your table here.*/
-);
-
--- CREATE TABLE rooms (
---   id INTEGER(11) PRIMARY KEY AUTO_INCREMENT,
---   roomname VARCHAR(255) NOT NULL
---   -- message INTEGER(11),
---   -- FOREIGN KEY (message) REFERENCES messages(id)
---   /* Describe your table here.*/
--- );
-
-CREATE TABLE messages (
-  id INTEGER(11) PRIMARY KEY AUTO_INCREMENT,
-  text VARCHAR(255) NOT NULL,
-  userid INTEGER(11),
-  roomname VARCHAR(255)
-  /* Describe your table here.*/
-);
-
-/* Create other tables and define schemas for them here! */
-
+COPY answers_photos from '/Users/tthornberryclass/HackReactorSEI/CSV-SDC/answers_photos.csv' DELIMITER ',' CSV HEADER;
 
 /*  Execute this file from the command line by typing:
- *    mysql -u root < server/schema.sql
- *  to create the database and the tables.*/
-
+ *    psql -d qanda -a -f ETL.sql
+ *  to fill the tables in with the data from the csv files.
+ *  You can comment out the other two commands to run one at a time,
+ *  starting with questions.*/
