@@ -15,26 +15,9 @@ const pool = new Pool({
 
 const db = Promise.promisifyAll(pool, { multiArgs: true });
 
-// db.connectAsync() // this connects and creates the tables
+// db.getAllQuestions = // db.connectAsync() // this connects and creates the tables
 //   .then(() => console.log(`Connected to PostGresql in database, on ${process.env.PORT}`))
-//   .then(() => {
-
-//     db.queryAsync(
-//       "CREATE TABLE IF NOT EXISTS questions (id SERIAL PRIMARY KEY, product_id INTEGER, body VARCHAR(255), date_written INTEGER, asker_name VARCHAR, asker_email VARCHAR(50), reported BOOLEAN, helpful INTEGER)"
-//     ); //this creates questions table
-
-
-//     db.queryAsync(
-//       "CREATE TABLE IF NOT EXISTS answers (id SERIAL PRIMARY KEY, question_id INTEGER, body VARCHAR(255), date_written INTEGER, answerer_name VARCHAR, answerer_email VARCHAR(50), reported BOOLEAN, helpful INTEGER, FOREIGN KEY (question_id) REFERENCES questions(id))"
-//     ); //this creates answers table need foreign key
-
-//     db.queryAsync(
-//       "CREATE TABLE IF NOT EXISTS answers_photos (id SERIAL PRIMARY KEY, answer_id INTEGER, url VARCHAR, FOREIGN KEY (answer_id) REFERENCES answers (id))"
-//     ); //this creates answers table need foreign key
-//   })
 //   .catch((err) => console.log(err));
-
-  //COPY questions FROM
 
   //might need this later to manage clients
 // pool.connect((err, client, release) => {
@@ -51,3 +34,4 @@ const db = Promise.promisifyAll(pool, { multiArgs: true });
 // })
 
 module.exports = pool;
+module.exports = db;
