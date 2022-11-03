@@ -25,7 +25,7 @@ db.connectAsync() // this connects and creates the tables
 
 
     db.queryAsync(
-      "CREATE TABLE IF NOT EXISTS answers (id SERIAL PRIMARY KEY, question_id INTEGER, body VARCHAR(255), date_written INTEGER, answerer_name VARCHAR, answerer_emial VARCHAR(50), reported BOOLEAN, helpful INTEGER, FOREIGN KEY (question_id) REFERENCES questions(id))"
+      "CREATE TABLE IF NOT EXISTS answers (id SERIAL PRIMARY KEY, question_id INTEGER, body VARCHAR(255), date_written INTEGER, answerer_name VARCHAR, answerer_email VARCHAR(50), reported BOOLEAN, helpful INTEGER, FOREIGN KEY (question_id) REFERENCES questions(id))"
     ); //this creates answers table need foreign key
 
     db.queryAsync(

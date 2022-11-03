@@ -9,22 +9,23 @@ mongoose.connect(uri, {useNewUrlParser: true});
 const questionsSchema = new Schema({
   id: INT PRIMARY-KEY AUTO-INCREMENT,
   product_id: INT,
-  body: VARCHAR,
+  body: VARCHAR(500),
   date_written: INT,
-  asker_name: VARCHAR,
-  asker_email: VARCHAR,
+  asker_name: VARCHAR(50),
+  asker_email: VARCHAR(100),
   reported: BOOLEAN,
   helpful: INT
 });
-
+//id,question_id,body,date_written,answerer_name,answerer_email,reported,helpful
 const answersSchema = new Schema({
   id: INT PRIMARY-KEY AUTO-INCREMENT,
-  body: VARCHAR,
-  date: DATE,
-  answerer_name: VARCHAR,
-  helpfulness: INT,
-  reported: BOOLEAN,
   question_id: INT FOREIGN-KEY,
+  body: VARCHAR(500),
+  date_written: DATE,
+  answerer_name: VARCHAR(50),
+  answerer_email: VARCHAR(100),
+  reported: BOOLEAN,
+  helpful: INT,
   photos: []
 });
 
