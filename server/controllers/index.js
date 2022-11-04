@@ -3,8 +3,7 @@ const models = require('../models')
 
 module.exports = {
   getQuestions: (req, res) => {
-    console.log(req.query);
-    var params = [req.query.product_id];
+    var params = [req.query.product_id]; // params must be in an array
     models.getAllQuestions(params,(err, result) => {
       if (err) {
         res.sendStatus(500).end();
@@ -12,25 +11,19 @@ module.exports = {
         res.send(result).end();
       }
     })
+  },
+  addQuestion: (req, res) => {
+    console.log('controllers tripped');
+    console.log('req query in models add Question',req.query, req.body);
+    var params = Object.values(req.body);
+    params.push(req.body.product_id);
+    models.postQuestion(params, (err, result) => {
+      if (err) {
+        res.sendStatus(500).end();
+      } else {
+        res.send(result).end(); // will we handle new get on the front-end to ensure new question shows up?
+      }
+    })
   }
-}
 
-
-
-  // app.get('/', (req, res) => {
-  //   console.log('GET REQUEST', req);
-  //   pool.query('SELECT * from questions offset 1000 limit 50;', (err, result) => {
-  //     if (err) throw err;
-  //     res.status(200);
-  //     res.send(result.rows);
-  //   })
-  // })
-
-
-
-
-
-
-
-
-// };
+};

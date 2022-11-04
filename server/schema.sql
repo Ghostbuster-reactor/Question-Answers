@@ -3,7 +3,7 @@
 \c qanda;
 
 -- //can include compression type
-CREATE TABLE IF NOT EXISTS questions (id SERIAL PRIMARY KEY, product_id INTEGER, body VARCHAR(255), date_written BIGINT, asker_name VARCHAR, asker_email VARCHAR(50), reported BOOLEAN, helpful INTEGER);
+CREATE TABLE IF NOT EXISTS questions (id SERIAL PRIMARY KEY, product_id INTEGER, body VARCHAR(255), date_written TIMESTAMP default, asker_name VARCHAR, asker_email VARCHAR(50), reported BOOLEAN default false, helpful INTEGER default 0);
 
 
 CREATE TABLE IF NOT EXISTS answers (id SERIAL PRIMARY KEY, question_id INTEGER, body VARCHAR(255), date_written BIGINT, answerer_name VARCHAR, answerer_email VARCHAR(50), reported BOOLEAN, helpful INTEGER, FOREIGN KEY (question_id) REFERENCES questions(id));
