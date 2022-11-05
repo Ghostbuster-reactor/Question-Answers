@@ -63,6 +63,17 @@ addHelpfulQuestion: (req, res) => {
       res.sendStatus(204).end();
     }
   })
-}
+},
+
+addReportedQuestion: (req, res) => {
+  console.log(req.params);
+  models.reportQuestion(req.params.question_id, (err, result) => {
+    if (err) {
+      res.semdStatus(500).end();
+    } else {
+      res.sendStatus(204).end();
+    }
+  })
+},
 
 };
