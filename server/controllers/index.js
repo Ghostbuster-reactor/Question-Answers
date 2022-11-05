@@ -40,8 +40,11 @@ module.exports = {
     })
   },
   addAnAnswer: (req, res) => {
-    console.log('req query in Controller addAnswer', req.body);
-  var params = req.body; //post params are objects with keys and values
+    console.log('req in Controller addAnswer', req.params);
+
+  var params = Object.values(req.body); //post params are objects with keys and values
+  params.unshift(Number(req.params.question_id));
+
   models.postAnswer(params, (err, result) => {
     if (err) {
       console.log('error', err);

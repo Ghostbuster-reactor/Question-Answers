@@ -63,6 +63,7 @@ module.exports = {
 
   postQuestion: (params, callback) => {
     //the params have to come in as an object, but have to become an array to work with postgres
+
     params = Object.values(params);
     var queryString = "INSERT INTO questions (body, asker_name, asker_email, product_id) VALUES ($1, $2, $3, $4)";
     pool.query(queryString, params, (err, results) => {
@@ -89,13 +90,16 @@ module.exports = {
 
 postAnswer: (params, callback) => {
   //the params have to come in as an object, but have to become an array to work with postgres
-  params = Object.values(params);
-  var queryString = "INSERT INTO answers (body, answerer_name, answerer_email) VALUES ($1, $2, $3, $4) where answer_id=";
+  console.log('params in  model index', params)
+  var urls = params.pop();
+  console.log('params in  model index', params)
+
+  var queryString = "INSERT INTO answers (question_id, body, answerer_name, answerer_email) VALUES ($1, $2, $3, $4)";
   pool.query(queryString, params, (err, results) => {
     if (err) {
       callback(err.code, err);
     } else {
-
+      console.log('results', results); //multiple queries to get answer_id?
       callback(null, results);
     }
   });
