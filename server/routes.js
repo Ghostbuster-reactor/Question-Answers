@@ -6,7 +6,7 @@ const controllers = require('./controllers');
 router.get('/qa/questions', controllers.getQuestions);
 router.post('/qa/questions', controllers.addQuestion);
 
-// router.get('/qa/questions/:question_id/answers', controllers.qnas.getAs);
+router.get('/qa/questions/:question_id/answers', controllers.getQAnswers);
 // router.post('/qa/questions/:question_id/answers', controllers.qnas.addA);
 // router.put('/qa/questions/:question_id/helpful', controllers.qnas.markQHelpful);
 // router.put('/qa/questions/:question_id/report', controllers.qnas.reportQ);
