@@ -2,7 +2,17 @@
 
 COPY questions from '/Users/tthornberryclass/HackReactorSEI/CSV-SDC/questions.csv' DELIMITER ',' CSV HEADER;
 
+ALTER TABLE questions ALTER COLUMN date_written TYPE TIMESTAMP USING to_timestamp(date_written/1000);
+
+ALTER TABLE questions
+ALTER COLUMN date_written SET DEFAULT CURRENT_TIMESTAMP;
+
 COPY answers from '/Users/tthornberryclass/HackReactorSEI/CSV-SDC/answers.csv' DELIMITER ',' CSV HEADER;
+
+ALTER TABLE answers ALTER COLUMN date_written TYPE TIMESTAMP USING to_timestamp(date_written/1000);
+
+ALTER TABLE answers
+ALTER COLUMN date_written SET DEFAULT CURRENT_TIMESTAMP;
 
 COPY answers_photos from '/Users/tthornberryclass/HackReactorSEI/CSV-SDC/answers_photos.csv' DELIMITER ',' CSV HEADER;
 
@@ -16,5 +26,3 @@ COPY answers_photos from '/Users/tthornberryclass/HackReactorSEI/CSV-SDC/answers
 -- ALTER TABLE questions
 -- ALTER COLUMN date_written TYPE TIMESTAMP;
 
--- ALTER TABLE questions
--- ALTER COLUMN date_written SET DEFAULT CURRENT_TIMESTAMP;
