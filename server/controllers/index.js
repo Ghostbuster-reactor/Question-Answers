@@ -16,6 +16,8 @@ module.exports = {
     console.log('controllers tripped');
     console.log('req query in models add Question',req.query, req.body);
     var params = Object.values(req.body);
+    var dateParam = Date.now();
+    params.push(dateParam);
     params.push(req.body.product_id);
     models.postQuestion(params, (err, result) => {
       if (err) {

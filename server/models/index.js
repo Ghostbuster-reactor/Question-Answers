@@ -16,8 +16,7 @@ module.exports = {
     });
   },
   postQuestion: (params, callback) => {
-
-    var queryString = "INSERT INTO table questions (body, name, email, product_id) VALUES ($1, $2, $3, $4) WHERE product_id=$5";
+    var queryString = "INSERT INTO table questions (body, name, email, product_id, date_written) VALUES ($1, $2, $3, $4, $5) WHERE product_id=$6";
     console.log('params in models.postQuestion',params);
     pool.query(queryString, params, (err, results) => {
       if (err) {
