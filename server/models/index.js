@@ -15,12 +15,16 @@ module.exports = {
       }
     });
   },
+  //INSERT INTO questions (body, asker_name, asker_email, product_id) VALUES ('hand it to them', 'IamAClown', 'email@email.com', 40480);
   postQuestion: (params, callback) => {
-    var queryString = "INSERT INTO table questions (body, name, email, product_id, date_written) VALUES ($1, $2, $3, $4, $5) WHERE product_id=$6";
-    console.log('params in models.postQuestion',params);
+    console.log(params);
+    params = Object.values(params);
+    console.log(params);
+
+    var queryString = "INSERT INTO questions (body, asker_name, asker_email, product_id) VALUES ($1, $2, $3, $4)";
     pool.query(queryString, params, (err, results) => {
       if (err) {
-        callback(err.code);
+        callback(err.code, err);
       } else {
         callback(null, results);
       }
