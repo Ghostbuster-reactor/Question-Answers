@@ -74,9 +74,8 @@ module.exports = {
       }
     });
   },
-
-  getAnswers: (params, callback) => {
-    console.log(params);
+  getAnswers: (params, callback) => { //need to add page and count and defaults
+    // console.log(params);
   var queryString = "SELECT * from answers WHERE question_id=$1 OFFSET 1 LIMIT 5"; //I am going to have to work on this!! My objects need joins and better key names
   pool.query(queryString, params, (err, results) => {
     if (err) {
@@ -88,7 +87,19 @@ module.exports = {
   });
 },
 
+postAnswer: (params, callback) => {
+  //the params have to come in as an object, but have to become an array to work with postgres
+  params = Object.values(params);
+  var queryString = "INSERT INTO answers (body, answerer_name, answerer_email) VALUES ($1, $2, $3, $4) where answer_id=";
+  pool.query(queryString, params, (err, results) => {
+    if (err) {
+      callback(err.code, err);
+    } else {
 
+      callback(null, results);
+    }
+  });
+},
 
 
 

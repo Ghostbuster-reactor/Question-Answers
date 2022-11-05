@@ -15,7 +15,7 @@ module.exports = {
     })
   },
   addQuestion: (req, res) => {
-    console.log('req query in models add Question', req.body);
+    console.log('req query in Controllers add Question', req.body);
     var params = req.body; //post params are objects with keys and values
 
     models.postQuestion(params, (err, result) => {
@@ -38,6 +38,18 @@ module.exports = {
         res.send(result).end();
       }
     })
-  }
+  },
+  addAnAnswer: (req, res) => {
+    console.log('req query in Controller addAnswer', req.body);
+  var params = req.body; //post params are objects with keys and values
+  models.postAnswer(params, (err, result) => {
+    if (err) {
+      console.log('error', err);
+      res.sendStatus(500).end();
+    } else {
+      res.send(result).end(); // will we handle new get on the front-end to ensure new question shows up?
+    }
+  })
+}
 
 };

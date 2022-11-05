@@ -1,6 +1,9 @@
 -- CREATE DATABASE qanda;
+-- DROP DATABASE qanda IF EXISTS;
+
 
 \c qanda;
+-- Use this command if you need to make any revisions to your tables
 -- DROP TABLE IF EXISTS answers_photos, answers, questions;
 
 -- //can include compression type
