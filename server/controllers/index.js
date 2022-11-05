@@ -64,12 +64,31 @@ addHelpfulQuestion: (req, res) => {
     }
   })
 },
-
 addReportedQuestion: (req, res) => {
   console.log(req.params);
   models.reportQuestion(req.params.question_id, (err, result) => {
     if (err) {
       res.semdStatus(500).end();
+    } else {
+      res.sendStatus(204).end();
+    }
+  })
+},
+addHelpfulAnswer: (req, res) => {
+  console.log(req.params);
+  models.putHelpfulAnswer(req.params.answer_id, (err, result) => {
+    if (err) {
+      res.sendStatus(500).end();
+    } else {
+      res.sendStatus(204).end();
+    }
+  })
+},
+addReportedAnswer: (req, res) => {
+  console.log(req.params);
+  models.reportAnswer(req.params.answer_id, (err, result) => {
+    if (err) {
+      res.sendStatus(500).end();
     } else {
       res.sendStatus(204).end();
     }

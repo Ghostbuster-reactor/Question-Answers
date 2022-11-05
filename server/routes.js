@@ -10,7 +10,7 @@ router.get('/qa/questions/:question_id/answers', controllers.getQAnswers);
 router.post('/qa/questions/:question_id/answers', controllers.addAnAnswer);
 router.put('/qa/questions/:question_id/helpful', controllers.addHelpfulQuestion);
 router.put('/qa/questions/:question_id/report', controllers.addReportedQuestion);
-// router.put('/qa/answers/:answer_id/helpful', controllers.qnas.markAHelpful);
-// router.put('/qa/answers/:answer_id/report', controllers.qnas.reportA);
+router.put('/qa/answers/:answer_id/helpful', controllers.addHelpfulAnswer);
+router.put('/qa/answers/:answer_id/report', controllers.addReportedAnswer);
 
 module.exports = router;

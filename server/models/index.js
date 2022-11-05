@@ -132,6 +132,32 @@ module.exports = {
         }
       })
   },
-
-
+  putHelpfulAnswer: (params, callback) => {
+    console.log(params);
+    var queryString = "UPDATE answers\
+      SET helpful = helpful + 1\
+      WHERE id=$1";
+      pool.query(queryString, params, (err, results) => {
+        if (err) {
+          callback(err.code, err);
+        } else {
+          console.log('results', results); //multiple queries to get answer_id?
+          callback(null, results);
+        }
+      })
+  },
+  reportAnswer: (params, callback) => {
+    console.log(params);
+    var queryString = "UPDATE answers\
+      SET reported = true\
+      WHERE id=$1";
+      pool.query(queryString, params, (err, results) => {
+        if (err) {
+          callback(err.code, err);
+        } else {
+          console.log('results', results); //multiple queries to get answer_id?
+          callback(null, results);
+        }
+      })
+  }
 }
