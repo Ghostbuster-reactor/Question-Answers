@@ -27,6 +27,7 @@ ALTER SEQUENCE answers_photos_id_seq restart with 2063759;
  *  to fill the tables in with the data from the csv files.
  *  You can comment out the other two commands to run one at a time,
  ALTER SEQUENCE questions_id_seq restart with 3518964; (for non-repeating - maybe find a way to make it auto-increment at the biggest number?
-
+SELECT setval(pg_get_serial_sequence('reviews', 'reviews_id'), (select max(reviews_id) from reviews))
+::text to turn data into string
  *  starting with questions.*/
 
