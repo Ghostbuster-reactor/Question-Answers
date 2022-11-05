@@ -23,7 +23,7 @@ module.exports = {
         console.log('error', err);
         res.sendStatus(500).end();
       } else {
-        res.send(result).end(); // will we handle new get on the front-end to ensure new question shows up?
+        res.send(201).end(); // will we handle new get on the front-end to ensure new question shows up?
       }
     })
   },
@@ -50,7 +50,17 @@ module.exports = {
       console.log('error', err);
       res.sendStatus(500).end();
     } else {
-      res.send(result).end(); // will we handle new get on the front-end to ensure new question shows up?
+      res.send(201).end(); // will we handle new get on the front-end to ensure new question shows up?
+    }
+  })
+},
+addHelpfulQuestion: (req, res) => {
+  console.log(req.params);
+  models.putHelpfulQuestion(req.params.question_id, (err, result) => {
+    if (err) {
+      res.semdStatus(500).end();
+    } else {
+      res.sendStatus(204).end();
     }
   })
 }
