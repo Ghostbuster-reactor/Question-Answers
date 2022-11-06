@@ -12,16 +12,17 @@ let sameCount = false;
 //might try to promisify these or use the promisification of db.
 module.exports = {
   getAllQuestions: (params, callback) => {
-    // console.log(params);
-    if (incomingProductID !== params.product_id) { //check if same productID
-      incomingProductID = params.product_id;
-    } else {
-      sameProduct = true;
-      if (page.count && incomingLimit === page.count) {
-        sameCount = true;
-      }
-    }  //work on defaults - of there is no page, offset by count + count upon repeat request
-    // //if there is a page number and
+    console.log('params', params.product_id);
+    params = [params.product_id];
+    // if (incomingProductID !== params.product_id) { //check if same productID
+    //   incomingProductID = params.product_id;
+    // } else {
+    //   sameProduct = true;
+    //   if (page.count && incomingLimit === page.count) {
+    //     sameCount = true;
+    //   }
+    // }  //work on defaults - of there is no page, offset by count + count upon repeat request
+    // // //if there is a page number and
     // //the product has already been called
     // //and the count is the same
     // //offset by the current count plus the count
@@ -45,13 +46,15 @@ module.exports = {
     //   incomingLimit = 5;
     // }
 
-    var parameterArray = [];
-    parameterArray.push(incomingProductID);
-    parameterArray.push(incomingPageOffset);
-    parameterArray.push(incomingLimit);
+    // var parameterArray = [];
+    // parameterArray.push(incomingProductID);
+    // parameterArray.push(incomingPageOffset);
+    // parameterArray.push(incomingLimit);
 
-    var queryString = "SELECT * from questions WHERE product_id=$1 OFFSET $2 LIMIT $3"; //I am going to have to work on this!! My objects need joins and better key names
-    pool.query(queryString, parameterArray, (err, results) => {
+    // var queryString = "SELECT * from questions WHERE product_id=$1 OFFSET $2 LIMIT $3"; //I am going to have to work on this!! My objects need joins and better key names
+    var queryString = "SELECT * from questions WHERE product_id=$1"; //I am going to have to work on this!! My objects need joins and better key names
+
+    pool.query(queryString, params, (err, results) => {
       if (err) {
         callback(err.code);
       } else {
@@ -76,8 +79,8 @@ module.exports = {
     });
   },
   getAnswers: (params, callback) => { //need to add page and count and defaults
-      // console.log(params);
-    var queryString = "SELECT * from answers WHERE question_id=$1 OFFSET 1 LIMIT 5"; //I am going to have to work on this!! My objects need joins and better key names
+      console.log(params);
+    var queryString = "SELECT * from answers WHERE question_id=$1"; //I am going to have to work on this!! My objects need joins and better key names
     pool.query(queryString, params, (err, results) => {
       if (err) {
         callback(err.code);

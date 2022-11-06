@@ -28,7 +28,7 @@ module.exports = {
     })
   },
   getQAnswers: (req, res) => {
-    // console.log(req)
+    // console.log(req.params)
     var params = [req.params.question_id]; // get params must be in an array
     // var params = [req.query.product_id]; // get params must be in an array
     models.getAnswers(params,(err, result) => {
