@@ -50,9 +50,10 @@ module.exports = {
     // parameterArray.push(incomingProductID);
     // parameterArray.push(incomingPageOffset);
     // parameterArray.push(incomingLimit);
+    var queryString = `SELECT json_build_object('product_id', '${params[0]}', 'results', ARRAY((SELECT json_build_object('question_id', o1.id, 'question_body', o1.body, 'question_date', o1.date_written, 'asker_name', o1.asker_name, 'question_helpfulness', o1.helpful, 'reported', o1.reported, 'answers', (SELECT json_object_agg(a2.id, (SELECT json_build_object('id', a2.id, 'body', a2.body, 'date', a2.date_written, 'answerer_name', a2.answerer_name, 'helpfulness', a2.helpful, 'reported', a2.reported)))FROM answers a2 WHERE question_id=o1.id)) FROM questions o1 WHERE product_id=$1 ORDER BY o1.helpful DESC)));`
 
     // var queryString = "SELECT * from questions WHERE product_id=$1 OFFSET $2 LIMIT $3"; //I am going to have to work on this!! My objects need joins and better key names
-    var queryString = "SELECT json_build_object('product_id', '40380', 'results', ARRAY((SELECT json_build_object('question_id', o1.id, 'question_body', o1.body, 'question_date', o1.date_written, 'asker_name', o1.asker_name, 'question_helpfulness', o1.helpful, 'reported', o1.reported) FROM questions o1 WHERE product_id=$1 ORDER BY o1.helpful DESC)));"
+    // var queryString = `SELECT json_build_object('product_id', '${params[0]}', 'results', ARRAY((SELECT json_build_object('question_id', o1.id, 'question_body', o1.body, 'question_date', o1.date_written, 'asker_name', o1.asker_name, 'question_helpfulness', o1.helpful, 'reported', o1.reported) FROM questions o1 WHERE product_id=$1 ORDER BY o1.helpful DESC)));`
 
     // var queryString = "SELECT * from questions WHERE product_id=$1";  //I am going to have to work on this!! My objects need joins and better key names
 
