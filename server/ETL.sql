@@ -6,21 +6,24 @@ ALTER TABLE questions ALTER COLUMN date_written TYPE TIMESTAMP USING to_timestam
 
 ALTER TABLE questions
 ALTER COLUMN date_written SET DEFAULT CURRENT_TIMESTAMP;
-
-ALTER SEQUENCE questions_id_seq restart with 3518964;
+SELECT pg_catalog.setval(pg_get_serial_sequence('questions', 'id'), MAX(id)) FROM questions;
+-- ALTER SEQUENCE questions_id_seq restart with 3518964;
 
 COPY answers from '/Users/tthornberryclass/HackReactorSEI/CSV-SDC/answers.csv' DELIMITER ',' CSV HEADER;
 
 ALTER TABLE answers ALTER COLUMN date_written TYPE TIMESTAMP USING to_timestamp(date_written/1000);
 
+SELECT pg_catalog.setval(pg_get_serial_sequence('answers', 'id'), MAX(id)) FROM answers;
+
 ALTER TABLE answers
 ALTER COLUMN date_written SET DEFAULT CURRENT_TIMESTAMP;
 
-ALTER SEQUENCE answers_id_seq restart with 6879307;
+-- ALTER SEQUENCE answers_id_seq restart with 6879307;
 
 COPY answers_photos from '/Users/tthornberryclass/HackReactorSEI/CSV-SDC/answers_photos.csv' DELIMITER ',' CSV HEADER;
+SELECT pg_catalog.setval(pg_get_serial_sequence('answers_photos', 'id'), MAX(id)) FROM answers_photos;
 
-ALTER SEQUENCE answers_photos_id_seq restart with 2063759;
+-- ALTER SEQUENCE answers_photos_id_seq restart with 2063759;
 
 /*  Execute this file from the command line by typing:
  *    psql -d qanda -a -f ETL.sql

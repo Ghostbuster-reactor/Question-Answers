@@ -52,14 +52,16 @@ module.exports = {
     // parameterArray.push(incomingLimit);
 
     // var queryString = "SELECT * from questions WHERE product_id=$1 OFFSET $2 LIMIT $3"; //I am going to have to work on this!! My objects need joins and better key names
-    var queryString = "SELECT * from questions WHERE product_id=$1"; //I am going to have to work on this!! My objects need joins and better key names
+    var queryString = "SELECT json_build_object('product_id', '40380', 'results', ARRAY((SELECT json_build_object('question_id', o1.id, 'question_body', o1.body, 'question_date', o1.date_written, 'asker_name', o1.asker_name, 'question_helpfulness', o1.helpful, 'reported', o1.reported) FROM questions o1 WHERE product_id=$1 ORDER BY o1.helpful DESC)));"
+
+    // var queryString = "SELECT * from questions WHERE product_id=$1";  //I am going to have to work on this!! My objects need joins and better key names
 
     pool.query(queryString, params, (err, results) => {
       if (err) {
         callback(err.code);
       } else {
-
-        callback(null, results.rows);
+        console.log(results.rows)
+        callback(null, results.rows[0].json_build_object);
       }
     });
   },
