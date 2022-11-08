@@ -5,8 +5,6 @@ const db = require('../database/db.js');
 //page #/offset/count
 //empty array vs null for questions answers photos
 
-
-//might try to promisify these or use the promisification of db.
 module.exports = {
   getAllQuestions: (params, callback) => {
     params = [params.product_id];
