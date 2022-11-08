@@ -45,7 +45,7 @@ module.exports = {
   getAnswers: (params, callback) => { //need to add page and count and defaults
       console.log(params[0]);
       // params = params[0];
-    var queryString = `SELECT json_build_object('question', '${params[0]}', 'page', 1, 'count', 5, 'results', ARRAY((SELECT json_build_object('answer_id', a2.id, 'body', a2.body, 'date', a2.date_written, 'answerer_name', a2.answerer_name, 'helpfulness', a2.helpful, 'reported', a2.reported, 'photos', (SELECT ARRAY_AGG (url) FROM answers_photos WHERE answer_id=a2.id)) FROM answers a2 WHERE question_id=$1 ORDER BY a2.helpful DESC)));`
+    var queryString = `SELECT json_build_object('question', '${params[0]}', 'page', 1, 'count', 5, 'results', ARRAY((SELECT json_build_object('answer_id', a2.id, 'body', a2.body, 'date', a2.date_written, 'answerer_name', a2.answerer_name, 'helpfulness', a2.helpful, 'reported', a2.reported, 'photos', ARRAY((SELECT json_build_object('id', ap3.id,'url', ap3.url) FROM answers_photos ap3 WHERE answer_id=a2.id))) FROM answers a2 WHERE question_id=$1 ORDER BY a2.helpful DESC)));`
     // var queryString = "SELECT * from answers WHERE question_id=$1"; //I am going to have to work on this!! My objects need joins and better key names
     pool.query(queryString, params, (err, results) => {
       if (err) {
