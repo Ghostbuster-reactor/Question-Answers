@@ -14,49 +14,9 @@ module.exports = {
   getAllQuestions: (params, callback) => {
     console.log('params', params.product_id);
     params = [params.product_id];
-    // if (incomingProductID !== params.product_id) { //check if same productID
-    //   incomingProductID = params.product_id;
-    // } else {
-    //   sameProduct = true;
-    //   if (page.count && incomingLimit === page.count) {
-    //     sameCount = true;
-    //   }
-    // }  //work on defaults - of there is no page, offset by count + count upon repeat request
-    // // //if there is a page number and
-    // //the product has already been called
-    // //and the count is the same
-    // //offset by the current count plus the count
-    // //otherwise
-    // //reset to offset 1 or 0;
-    // if (params.page && sameProduct && sameCount) { //if there is a page count and
-    //   incomingPageOffset = params.page;
-    // } else if
 
-    // if (sameProduct) {
-
-    // }
-    // if (params.page) {
-    // } else {
-    //   incomingPageOffset = 1;
-    // }
-
-    // if (params.count) {
-
-    // } else {
-    //   incomingLimit = 5;
-    // }
-
-    // var parameterArray = [];
-    // parameterArray.push(incomingProductID);
-    // parameterArray.push(incomingPageOffset);
-    // parameterArray.push(incomingLimit);
     var queryString = `SELECT json_build_object('product_id', '${params[0]}', 'results', ARRAY((SELECT json_build_object('question_id', o1.id, 'question_body', o1.body, 'question_date', o1.date_written, 'asker_name', o1.asker_name, 'question_helpfulness', o1.helpful, 'reported', o1.reported, 'answers', (SELECT json_object_agg(a2.id, (SELECT json_build_object('id', a2.id, 'body', a2.body, 'date', a2.date_written, 'answerer_name', a2.answerer_name, 'helpfulness', a2.helpful, 'reported', a2.reported, 'photos',
     (SELECT ARRAY_AGG (url) FROM answers_photos WHERE answer_id=a2.id))))FROM answers a2 WHERE question_id=o1.id)) FROM questions o1 WHERE product_id=$1 ORDER BY o1.helpful DESC LIMIT 5)));`
-
-    // var queryString = "SELECT * from questions WHERE product_id=$1 OFFSET $2 LIMIT $3"; //I am going to have to work on this!! My objects need joins and better key names
-    // var queryString = `SELECT json_build_object('product_id', '${params[0]}', 'results', ARRAY((SELECT json_build_object('question_id', o1.id, 'question_body', o1.body, 'question_date', o1.date_written, 'asker_name', o1.asker_name, 'question_helpfulness', o1.helpful, 'reported', o1.reported) FROM questions o1 WHERE product_id=$1 ORDER BY o1.helpful DESC)));`
-
-    // var queryString = "SELECT * from questions WHERE product_id=$1";  //I am going to have to work on this!! My objects need joins and better key names
 
     pool.query(queryString, params, (err, results) => {
       if (err) {
@@ -83,14 +43,16 @@ module.exports = {
     });
   },
   getAnswers: (params, callback) => { //need to add page and count and defaults
-      console.log(params);
-    var queryString = "SELECT * from answers WHERE question_id=$1"; //I am going to have to work on this!! My objects need joins and better key names
+      console.log(params[0]);
+      // params = params[0];
+    var queryString = `SELECT json_build_object('question', '${params[0]}', 'page', 1, 'count', 5, 'results', ARRAY((SELECT json_build_object('answer_id', a2.id, 'body', a2.body, 'date', a2.date_written, 'answerer_name', a2.answerer_name, 'helpfulness', a2.helpful, 'reported', a2.reported, 'photos', (SELECT ARRAY_AGG (url) FROM answers_photos WHERE answer_id=a2.id)) FROM answers a2 WHERE question_id=$1 ORDER BY a2.helpful DESC)));`
+    // var queryString = "SELECT * from answers WHERE question_id=$1"; //I am going to have to work on this!! My objects need joins and better key names
     pool.query(queryString, params, (err, results) => {
       if (err) {
         callback(err.code);
       } else {
 
-        callback(null, results.rows);
+        callback(null, results.rows[0].json_build_object);
       }
     });
   },
