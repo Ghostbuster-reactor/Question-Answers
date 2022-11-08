@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS answers_photos (
   id SERIAL PRIMARY KEY,
   answer_id INTEGER REFERENCES answers (id),
   url VARCHAR,
-); -- url might need to be an array
+);
 
 CREATE INDEX idx_product_id ON questions (product_id);
 CREATE INDEX idx_question_id ON answers (question_id);

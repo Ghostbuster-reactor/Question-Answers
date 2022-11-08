@@ -21,11 +21,13 @@
     "bluebird": "^3.7.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+
     "morgan": "^1.10.0",
     "npx": "^10.2.2",
     "pg": "^8.8.0"
   },
   "devDependencies": {
-    "chakram": "^1.5.0"
+    "chakram": "^1.5.0",
+    "k6": "^0.0.0"
   }
 }
