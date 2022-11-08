@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controllers = require('./controllers');
 
-//Questions Routes
+//Questions and Answers Routes
 router.get('/qa/questions', controllers.getQuestions);
 router.post('/qa/questions', controllers.addQuestion);
 

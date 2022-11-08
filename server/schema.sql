@@ -1,4 +1,5 @@
--- CREATE DATABASE qanda;
+CREATE DATABASE qanda IF NOT EXISTS;
+-- Use this command if you need to make complete revisions to your database
 -- DROP DATABASE qanda IF EXISTS;
 
 
@@ -6,7 +7,6 @@
 -- Use this command if you need to make any revisions to your tables
 -- DROP TABLE IF EXISTS answers_photos, answers, questions;
 
--- //can include compression type
 CREATE TABLE IF NOT EXISTS questions (
   id SERIAL PRIMARY KEY,
   product_id INTEGER,
