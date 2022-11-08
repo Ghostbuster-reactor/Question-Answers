@@ -3,9 +3,7 @@ const models = require('../models')
 
 module.exports = {
   getQuestions: (req, res) => {
-    console.log(req.query)
     var params = req.query; // get params must be in an array
-    // var params = [req.query.product_id]; // get params must be in an array
     models.getAllQuestions(params,(err, result) => {
       if (err) {
         res.sendStatus(500).end();
@@ -15,12 +13,9 @@ module.exports = {
     })
   },
   addQuestion: (req, res) => {
-    console.log('req query in Controllers add Question', req.body);
     var params = req.body; //post params are objects with keys and values
-
     models.postQuestion(params, (err, result) => {
       if (err) {
-        console.log('error', err);
         res.sendStatus(500).end();
       } else {
         res.send(201).end(); // will we handle new get on the front-end to ensure new question shows up?
@@ -28,9 +23,7 @@ module.exports = {
     })
   },
   getQAnswers: (req, res) => {
-    // console.log(req.params)
     var params = [req.params.question_id]; // get params must be in an array
-    // var params = [req.query.product_id]; // get params must be in an array
     models.getAnswers(params,(err, result) => {
       if (err) {
         res.sendStatus(500).end();
@@ -40,13 +33,10 @@ module.exports = {
     })
   },
   addAnAnswer: (req, res) => {
-    console.log('req in Controller addAnswer', req.body);
-
     var params = req.body;
     params.question_id = req.params.question_id;
   models.postAnswer(params, (err, result) => {
     if (err) {
-      console.log('error', err);
       res.sendStatus(500).end();
     } else {
       res.send(201).end(); // will we handle new get on the front-end to ensure new question shows up?
@@ -54,27 +44,24 @@ module.exports = {
   })
 },
 addHelpfulQuestion: (req, res) => {
-  console.log(req.params);
   models.putHelpfulQuestion(req.params.question_id, (err, result) => {
     if (err) {
-      res.semdStatus(500).end();
+      res.sendStatus(500).end();
     } else {
       res.sendStatus(204).end();
     }
   })
 },
 addReportedQuestion: (req, res) => {
-  console.log(req.params);
   models.reportQuestion(req.params.question_id, (err, result) => {
     if (err) {
-      res.semdStatus(500).end();
+      res.sendStatus(500).end();
     } else {
       res.sendStatus(204).end();
     }
   })
 },
 addHelpfulAnswer: (req, res) => {
-  console.log(req.params);
   models.putHelpfulAnswer(req.params.answer_id, (err, result) => {
     if (err) {
       res.sendStatus(500).end();
@@ -84,7 +71,6 @@ addHelpfulAnswer: (req, res) => {
   })
 },
 addReportedAnswer: (req, res) => {
-  console.log(req.params);
   models.reportAnswer(req.params.answer_id, (err, result) => {
     if (err) {
       res.sendStatus(500).end();
