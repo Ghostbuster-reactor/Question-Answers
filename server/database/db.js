@@ -8,6 +8,8 @@ const pool = new Pool({
   port: 5432,
   max: 20,
   database: process.env.DB_NAME,
+  // user: process.env.DB_USER,
+  // password: process.env.DB_PASS,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 20000, //this was 2000
 });
