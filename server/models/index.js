@@ -148,17 +148,16 @@ module.exports = {
       .catch(err => callback(err));
   },
   putHelpfulAnswer: (params, callback) => {
-    var queryString = "UPDATE answers\
-      SET helpful = helpful + 1\
-      WHERE id=$1";
+    var queryString = `
+    UPDATE answers SET helpful = helpful + 1
+      WHERE id=$1;`;
     pool.query(queryString, [params])
       .then(results => callback(null, results))
       .catch(err => callback(err));
   },
   reportAnswer: (params, callback) => {
-    var queryString = "UPDATE answers\
-      SET reported = true\
-      WHERE id=$1";
+    var queryString = `
+      UPDATE answers SET reported = true WHERE id=$1;`;
     pool.query(queryString, [params])
       .then(results => callback(null, results))
       .catch(err => callback(err));

@@ -1,9 +1,10 @@
 CREATE DATABASE qanda IF NOT EXISTS;
+\c qanda;
+
 -- Use this command if you need to make complete revisions to your database
 -- DROP DATABASE qanda IF EXISTS;
 
 
-\c qanda;
 -- Use this command if you need to make any revisions to your tables
 -- DROP TABLE IF EXISTS answers_photos, answers, questions;
 
@@ -28,7 +29,6 @@ CREATE TABLE IF NOT EXISTS answers (
   helpful INTEGER default 0,
 );
 
-
 CREATE TABLE IF NOT EXISTS answers_photos (
   id SERIAL PRIMARY KEY,
   answer_id INTEGER REFERENCES answers (id),
@@ -46,4 +46,3 @@ CREATE INDEX idx_answer_id ON answers_photos (answer_id);
  psql -d qanda
  */
 
--- //date_written TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP

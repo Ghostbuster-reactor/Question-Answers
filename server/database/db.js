@@ -3,14 +3,14 @@ const { Pool } = require('pg');
 const Promise = require("bluebird");
 
 const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: 5432,
-  max: 20,
-  database: process.env.DB_NAME,
-  // user: process.env.DB_USER,
-  // password: process.env.DB_PASS,
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+  // max: 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 20000, //this was 2000
+  connectionTimeoutMillis: 2000, //this was 2000
 });
 
 
