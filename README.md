@@ -1,7 +1,7 @@
 # Question-Answers
 Questions &amp; Answers
 
-This project was to create an API for an e-commerce site that uses legacy data stored in large .CSV files, and to split the API into microservices. I took responsibility for the Questions and Answers database management system/microservice.
+This project was to create an API for an e-commerce site that used legacy data stored in large 1-2 GB  .CSV files containing 1-2 million different product entries, and to split the API into microservices. I took responsibility for the Questions and Answers database management system/microservice.
 
 The goal with creating this API was to handle at least 100 RPS on AWS EC2 instances with low latency (< 2000 ms) and have an error rate below 1%.
 
