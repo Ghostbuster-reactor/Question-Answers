@@ -1,10 +1,18 @@
 # Question-Answers
 Questions &amp; Answers
 
-This project was to create an API for an e-commerce site that used legacy data stored in large 1-2 GB  .CSV files containing 1-2 million different product entries, and to split the API into microservices. I took responsibility for the Questions and Answers database management system/microservice.
+This project was:
+* To create an API for an e-commerce site that used legacy data stored in large 1-2 GB .CSV files containing 1-2 million different product entries that required ETL
+* To split the API into microservices and deploy them. 
 
-The goal with creating this API was to handle at least 100 RPS on AWS EC2 instances with low latency (< 2000 ms) and have an error rate below 1%.
+I took responsibility for the Questions and Answers database management system/microservice.
 
+The goal with creating this API was to handle at least 100 RPS(Requests per second) on AWS EC2 instances with low latency (< 2000 ms) and have an error rate below 1%.
+
+I deployed multiple AWS EC2 server instances, one database instance with the cleaned data, one Nginx load balancer instance, and was able to reach 1200 RPS with an average latency of 70ms and a 0% error rate. 
+I was further able to improve the RPS by using caching, which allowed for 1900 RPS, but did increase the latency by 25ms. 
+
+If I wanted to get even better average metrics for similar projects in the future, I would attempt pooling and adding more server and database instances.
 
 <h3> Click on the image below to go to my Engineering Journal describing this project in more detail. </h3>
 <div style={{display: flex; justify-content: space-around;}}>
